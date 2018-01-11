@@ -1,7 +1,7 @@
 class App < Sinatra::Base
 
 	get '/' do
-		"Hello, Grillkorv!"
+		slim(:index)
 	end
 
 end
