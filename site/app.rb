@@ -24,21 +24,22 @@ class App < Sinatra::Base
 		email = params[:email].strip
 		name = params[:name].strip
 		password = params[:password]
-		password2 = params[:password_confim]
+		password_confirm = params[:password_confirm]
+		puts "Password: #{password}, confirm: #{password_confirm}"
 
-		if password != password2 && false
+		if password != password_confirm
 			puts "Passwords don't match!"
-			return slim(:register)
+			return redirect('/account/register')
 		end
 
 		db = open_database()
 		user = get_user_by_email(email, db)
 		if user != nil
 			puts "User with email '#{email}' already exists!"
-			return slim(:register)
+			return redirect('/account/register')
 		end
 		register_user(email, name, password, db)
 
-		slim(:register)
+		return redirect('/')
 	end
 end
