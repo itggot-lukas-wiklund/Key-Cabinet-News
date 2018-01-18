@@ -28,6 +28,7 @@ module Auth
         password_encrypted = BCrypt::Password.create(password)
         db.execute("INSERT INTO users(email, name, password) VALUES(?, ?, ?)",
         [email, name, password_encrypted])
+        session[:user_id] = id
     end
 
     def login_user(email, password)
