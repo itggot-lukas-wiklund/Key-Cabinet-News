@@ -1,3 +1,5 @@
+require 'session'
+
 module Auth
     
     def open_database()
@@ -23,7 +25,25 @@ module Auth
     end
 
     def register_user(email, name, password, db)
+        password_encrypted = BCrypt::Password.create(password)
         db.execute("INSERT INTO users(email, name, password) VALUES(?, ?, ?)",
-        [email, name, password])
+        [email, name, password_encrypted])
+    end
+
+    def login_user(email, password)
+        db = open_database()
+        users = db.execute("SELECT * FROM users WHERE email = '#{email}'")
+        if users.length == 0
+            return -1
+        end
+
+        user = users[0]
+        if BCrypt::Password.new(user['password']) == password
+            id = user['id']
+            session[:user_id] = id
+            return id
+        end
+
+        return -1
     end
 end

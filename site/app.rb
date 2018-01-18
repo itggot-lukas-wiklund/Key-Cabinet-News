@@ -13,7 +13,15 @@ class App < Sinatra::Base
 	end
 
 	post '/account/login' do
+		email = params[:email]
+		password = params[:password]
 
+		id = login_user(email, password)
+		if id == -1
+			return redirect('/account/login')
+		end
+
+		return redirect('/')
 	end
 
 	get '/account/register' do
