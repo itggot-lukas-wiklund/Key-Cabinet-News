@@ -26,13 +26,13 @@ module Auth
 
     def register_user(email, name, password, db)
         password_encrypted = BCrypt::Password.create(password)
-        db.execute("INSERT INTO users(email, name, password) VALUES(?, ?, ?)",
+        result = db.execute("INSERT INTO users(email, name, password) VALUES(?, ?, ?)",
         [email, name, password_encrypted])
+        id = db.execute("SELECT id FROM users WHERE email = '#{email}'")[0]["id"]
         session[:user_id] = id
     end
 
-    def login_user(email, password)
-        db = open_database()
+    def login_user(email, password, db)
         users = db.execute("SELECT * FROM users WHERE email = '#{email}'")
         if users.length == 0
             return -1
