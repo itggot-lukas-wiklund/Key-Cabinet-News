@@ -16,7 +16,7 @@ class App < Sinatra::Base
 		email = params[:email]
 		password = params[:password]
 
-		id = login_user(email, password)
+		id = login_user(email, password, open_database())
 		if id == -1
 			return redirect('/account/login')
 		end

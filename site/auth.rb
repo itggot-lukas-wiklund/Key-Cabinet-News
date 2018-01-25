@@ -31,8 +31,7 @@ module Auth
         session[:user_id] = id
     end
 
-    def login_user(email, password)
-        db = open_database()
+    def login_user(email, password, db)
         users = db.execute("SELECT * FROM users WHERE email = '#{email}'")
         if users.length == 0
             return -1
