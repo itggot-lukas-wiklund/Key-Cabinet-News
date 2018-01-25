@@ -48,6 +48,10 @@ module Auth
         return -1
     end
 
+    def logout_user()
+        session[:user_id] = nil
+    end
+
     def get_user_id()
         id = session[:user_id]
         if id == nil

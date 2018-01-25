@@ -52,4 +52,9 @@ class App < Sinatra::Base
 
 		return redirect('/')
 	end
+
+	get '/account/logout' do
+		logout_user()
+		return redirect('/')
+	end
 end
