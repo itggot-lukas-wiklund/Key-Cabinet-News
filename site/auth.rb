@@ -26,8 +26,9 @@ module Auth
 
     def register_user(email, name, password, db)
         password_encrypted = BCrypt::Password.create(password)
-        db.execute("INSERT INTO users(email, name, password) VALUES(?, ?, ?)",
+        result = db.execute("INSERT INTO users(email, name, password) VALUES(?, ?, ?)",
         [email, name, password_encrypted])
+        id = db.execute("SELECT id FROM users WHERE email = '#{email}'")[0]["id"]
         session[:user_id] = id
     end
 
