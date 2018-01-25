@@ -3,7 +3,19 @@ html
 	head
 		meta charset="UTF-8"
 		title Key Cabinet News
+		link rel="stylesheet" href="/css/base.css"
+		link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"
 	
 	body
+		header
+			div.group
+				a.title href="/" Key Cabinet News
+			div.group
+				- if is_logged_in
+					a href="/account" Mitt Konto
+					a href="/account/logout" Logga ut
+				- else
+					a href="/account/login" Logga in
+					a href="/account/register" Registrera dig
 		.content
 			== yield
