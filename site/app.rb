@@ -52,4 +52,13 @@ class App < Sinatra::Base
 
 		return redirect('/')
 	end
+
+	get '/account/logout' do
+		logout_user()
+		return redirect('/')
+	end
+
+	def get_layout_locals()
+		return {is_logged_in: is_logged_in()}
+	end
 end
