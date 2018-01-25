@@ -47,4 +47,16 @@ module Auth
 
         return -1
     end
+
+    def get_user_id()
+        id = session[:user_id]
+        if id == nil
+            return -1
+        end
+        return id
+    end
+
+    def is_logged_in()
+        return get_user_id() != -1
+    end
 end
