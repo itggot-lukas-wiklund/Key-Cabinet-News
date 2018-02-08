@@ -1,5 +1,7 @@
 require_relative 'auth.rb'
+require_relative 'products.rb'
 include Auth
+include Products
 require 'session'
 
 class App < Sinatra::Base
@@ -7,7 +9,8 @@ class App < Sinatra::Base
 	enable :sessions
 
 	get '/' do
-		slim(:index)
+		products = get_products(open_database())
+		slim(:index, locals:{'products': products}.merge(get_layout_locals()))
 	end
 
 	get '/account/login' do
