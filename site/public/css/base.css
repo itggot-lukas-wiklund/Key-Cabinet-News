@@ -36,20 +36,3 @@ header .group * {
 .content {
     margin: 30px 30px 30px 30px;
 }
-
-.elias {
-    display: flex;
-    flex-direction: column;
-}
-
-.up {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.down {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}

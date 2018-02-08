@@ -10,10 +10,6 @@ class App < Sinatra::Base
 		slim(:index)
 	end
 
-	get '/homepage' do
-		slim(:homepage)
-	end
-
 	get '/account/login' do
 		slim(:login)
 	end
@@ -27,7 +23,7 @@ class App < Sinatra::Base
 			return redirect('/account/login')
 		end
 
-		return redirect('/homepage')
+		return redirect('/')
 	end
 
 	get '/account/register' do
